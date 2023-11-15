@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% block title %} {% endblock title %}
+    <!--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css"
+      integrity="sha512-xiunq9hpKsIcz42zt0o2vCo34xV0j6Ny8hgEylN3XBglZDtTZ2nwnqF/Z/TTCc18sGdvCjbFInNd++6q3J0N6g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* Include this stylesheet after Milligram or merge it with your main.css */
+
+      body {
+        background: #2c2f34;
+        color: #f2f2f2;
+      }
+
+      select {
+        color: #f2f2f2;
+      }
+
+      .navigation .title,
+      .navigation-title {
+        color: #f2f2f2;
+      }
+
+      .navigation {
+        background: #34373c;
+        border-bottom: 0.1rem solid #1b1c1d;
+      }
+
+      .header {
+        background-color: #141518;
+      }
+
+      pre {
+        background: #141518;
+      }
+
+      .prettyprint {
+        color: #f2f2f2;
+      }
+
+      .prettyprint.lang-md * {
+        color: #f2f2f2 !important;
+      }
+
+      code {
+        background: #141518;
+      }
+
+      .prettyprint .atv {
+        color: rgba(73, 158, 223, 1);
+      }
+    </style>
+  </head>
+
+  <body>
+    {% block content %} {% endblock content %}
+    <script
+      src="https://unpkg.com/htmx.org@1.9.8"
+      integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

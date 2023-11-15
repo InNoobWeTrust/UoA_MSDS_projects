@@ -1,0 +1,21 @@
+<h1>Processed input</h1>
+<div id="processed_input" style="overflow: scroll">
+  {{ formatted_input.to_html() | safe }}
+</div>
+
+<h1>Gender prediction</h1>
+<div id="gender_prediction">
+  {{ gender_proba.to_html() | safe }}
+  <p>Predicted gender: {{ gender_final }}</p>
+</div>
+
+<h1>Age prediction</h1>
+<div id="age_prediction">
+  {{ age_proba.to_html() | safe }}
+  <p>Predicted age group: {{ age_final }}</p>
+</div>
+
+<h1>Campaign prediction</h1>
+<div id="campaign_prediction">
+  {{ matched_campaigns.to_html() | safe }}
+</div>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Ad Recommender System</title>
+{% endblock title %}
+
+{% block content %}
+<main style="margin: 2rem">
+  <h1>Ad Recommender System</h1>
+  <section>
+    <form id="form">
+      <label for="test_data">Choose a device:</label>
+      <select name="device" id="device" form="form">
+        {% for device in devices %}
+        <option value="{{ device.device_id }}">{{ device }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" hx-post="htmx/predict" hx-target="#prediction" />
+    </form>
+  </section>
+
+  <section id="prediction"></section>
+</main>
+<script src="/static/index.js"></script>
+{% endblock content %}
