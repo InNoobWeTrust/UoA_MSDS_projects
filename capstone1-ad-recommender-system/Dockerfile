@@ -24,22 +24,16 @@ LABEL reference="https://medium.com/@albertazzir/blazing-fast-python-docker-buil
 LABEL description="The code is part of Capstone project 1 \
     for MSc in Data Science at University of Arizona"
 
-ARG FLASK_RUN_PORT=8000
-ENV FLASK_RUN_PORT ${FLASK_RUN_PORT}
-ENV BIND "0.0.0.0:${FLASK_RUN_PORT}"
-
 ENV VIRTUAL_ENV=/app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 
-WORKDIR /app
-
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
-COPY data ./data
-COPY static ./static
-COPY templates ./templates
-COPY app.py ./app.py
+COPY data/ /app/data
+COPY templates/ /app/templates
+COPY app.py /app/app.py
 
-EXPOSE ${FLASK_RUN_PORT}
+WORKDIR /app
+EXPOSE 80
 
-CMD ["gunicorn", "app:app"]
+ENTRYPOINT [".venv/bin/python3", "-m", "gunicorn", "-b", "0.0.0.0:80", "app:app"]

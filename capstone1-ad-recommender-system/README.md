@@ -39,7 +39,7 @@ poe streamlit-run
 ## Run with docker
 
 ```sh
-poe docker-run
+poe docker-dev
 ```
 
 Stop docker container with

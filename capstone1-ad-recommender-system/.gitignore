@@ -1,2 +1,7 @@
 .DS_Store
 __pycache__/
+ad-rec-flask.tar
+.env
+instances.txt
+*.gen.json
+*.gen.sh

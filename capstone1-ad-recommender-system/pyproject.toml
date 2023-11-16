@@ -5,11 +5,24 @@ description = "UoA Capstone Project 1 - Ad Recommender System"
 authors = ["Vu Truong <forbidden.gun@gmail.com>"]
 
 [tool.poe.tasks]
+# Development serve
 dev.shell = "flask run --debug"
 streamlit-run.shell = "streamlit run ad_rec_streamlit.py"
-docker-run.shell = "docker build -t ad-rec-flask:latest . && docker run --rm -d -p 8000:8000 --name ad-rec-flask ad-rec-flask:latest"
+docker-build.shell = "docker buildx build --platform=linux/amd64 -t ad-rec-flask ."
+docker-run.shell = "docker run --platform=linux/amd64 --rm -d -p 80:80 --name ad-rec-flask ad-rec-flask"
 docker-stop.shell = "docker stop ad-rec-flask"
 docker-log.shell = "docker logs ad-rec-flask"
+docker-dev = ["docker-build", "docker-run"]
+
+# AWS deployment
+aws-setup-permissions.shell = "cd aws-deploy && ./setup-access-permissions.sh"
+aws-cleanup-permissions.shell = "cd aws-deploy && ./cleanup-access-permissions.sh"
+push-docker-s3.shell = "docker save -o ad-rec-flask.tar ad-rec-flask:latest && set -o allexport && source aws-deploy/.env && set +o allexport && aws s3 cp ad-rec-flask.tar s3://${S3_BUCKET}/docker-registry/ad-rec-flask.tar"
+push-docker-s3.envfile = "aws-deploy/.env"
+aws-start-ec2-instance.shell = "cd aws-deploy && ./start-ec2-instance.sh"
+aws-terminate-ec2-instance.shell = "cd aws-deploy && cat instances.txt | tr '\n' ' ' | xargs -I {} aws ec2 terminate-instances --instance-ids {}"
+
+# Dev tools
 test.shell = "pytest -s -v"
 ruff-fix.shell = "ruff format ."
 
