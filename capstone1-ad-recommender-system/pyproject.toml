@@ -15,12 +15,12 @@ docker-log.shell = "docker logs ad-rec-flask"
 docker-dev = ["docker-build", "docker-run"]
 
 # AWS deployment
-aws-setup-permissions.shell = "cd aws-deploy && ./setup-access-permissions.sh"
-aws-cleanup-permissions.shell = "cd aws-deploy && ./cleanup-access-permissions.sh"
 push-docker-s3.shell = "docker save -o ad-rec-flask.tar ad-rec-flask:latest && set -o allexport && source aws-deploy/.env && set +o allexport && aws s3 cp ad-rec-flask.tar s3://${S3_BUCKET}/docker-registry/ad-rec-flask.tar"
 push-docker-s3.envfile = "aws-deploy/.env"
+aws-setup-security-group.shell = "cd aws-deploy && ./setup-security-group.sh"
+aws-cleanup-security-group.shell = "cd aws-deploy && aws ec2 delete-security-group --group-name Ec2SshHttp"
 aws-start-ec2-instance.shell = "cd aws-deploy && ./start-ec2-instance.sh"
-aws-terminate-ec2-instance.shell = "cd aws-deploy && cat instances.txt | tr '\n' ' ' | xargs -I {} aws ec2 terminate-instances --instance-ids {}"
+aws-terminate-ec2-instance.shell = "cd aws-deploy && cat instance.txt | tr '\n' ' ' | xargs -I {} aws ec2 terminate-instances --instance-ids {}"
 
 # Dev tools
 test.shell = "pytest -s -v"

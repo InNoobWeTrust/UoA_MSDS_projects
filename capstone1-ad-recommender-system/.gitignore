@@ -2,6 +2,6 @@
 __pycache__/
 ad-rec-flask.tar
 .env
-instances.txt
+instance.txt
 *.gen.json
 *.gen.sh
