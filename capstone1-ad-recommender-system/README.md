@@ -17,12 +17,12 @@ pip install grip
 grip README.md
 ```
 
-Then open the link show in output, or open another shell tab and execute this command to open it automatically
+Then open the link shown in the output, or open another shell tab and execute this command to open it automatically
 ```sh
 open http://localhost:6419
 ```
 
-## Modeling
+## Modeling part
 
 The modeling is executed on Google Colab environment, raw data is fetched from S3 and all the models and derived data are saved to Google Drive.
 
@@ -30,14 +30,22 @@ After modeling, simply download the files inside `deploy` directory of Google Dr
 
 The notebooks are downloaded into `colab-notebooks` directory for reference.
 
-The notebooks are also exported into PDF files in `doc/pdf/`.
+The notebooks are also exported into PDF files in `doc/pdf/`, each contains explanations for each step taken.
 
 - [doc/pdf/Task1.1+2+3_Read_Clean_EDA.pdf](doc/pdf/Task1.1+2+3_Read_Clean_EDA.pdf)
 - [doc/pdf/Task1.4_Advance_visualization_and_clustering.pdf](doc/pdf/Task1.4_Advance_visualization_and_clustering.pdf)
 - [doc/pdf/Task1.5_Model_building.pdf](doc/pdf/Task1.5_Model_building.pdf)
 - [doc/pdf/Task1.6_Model_Evaluation.pdf](doc/pdf/Task1.6_Model_Evaluation.pdf)
 
-## Deployment
+The models are exported using `dill` to embed the imports to correct libraries and also embed the custom Python code that is used in the pipeline.
+
+The label encoders are also exported to convert back the numeric predictions to label names.
+
+The models used in deployments are not tuned with best hyper parameters. Due to time constraint, the models are tuned quickly using randomized search so the performance is just slightly better than random guess. To achieve better performance, switch to `GridSearch` in `colab-notebooks/Task1.5_Model_building.ipynb` and run the notebook again on Colab pro plan, as the training time estimated is around or more than half a day and require more powerful machine to run.
+
+Nevertheless, as the base performance is already not so good, tuning is not likely to boost the performance much. The better strategy is to combine more types of classifiers in stacking models to better learn the patterns from data, and also find some good derived features to add to input data for training.
+
+## Deployment part
 
 ### Prerequisite
 Install Poetry
