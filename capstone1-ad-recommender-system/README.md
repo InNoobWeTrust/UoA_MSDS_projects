@@ -1,6 +1,45 @@
 # Ad Recommender System
 
-## Prerequisite
+![Demo](./doc/img/demo.gif "demo")
+
+![Demo video](./doc/video/demo.mov "demo video")
+
+## Foreword
+
+The whole project is also backed up to Github at [InNoobWeTrust:UoA_MSDS_projects/tree/main/capstone1-ad-recommender-system](https://github.com/InNoobWeTrust/UoA_MSDS_projects/tree/main/capstone1-ad-recommender-system).
+
+To view this README using web browser install `grip` and use it to render this README like what Github does
+
+```sh
+pip install grip
+```
+```sh
+grip README.md
+```
+
+Then open the link show in output, or open another shell tab and execute this command to open it automatically
+```sh
+open http://localhost:6419
+```
+
+## Modeling
+
+The modeling is executed on Google Colab environment, raw data is fetched from S3 and all the models and derived data are saved to Google Drive.
+
+After modeling, simply download the files inside `deploy` directory of Google Drive into `data` directory in this repository.
+
+The notebooks are downloaded into `colab-notebooks` directory for reference.
+
+The notebooks are also exported into PDF files in `doc/pdf/`.
+
+- [doc/pdf/Task1.1+2+3_Read_Clean_EDA.pdf](doc/pdf/Task1.1+2+3_Read_Clean_EDA.pdf)
+- [doc/pdf/Task1.4_Advance_visualization_and_clustering.pdf](doc/pdf/Task1.4_Advance_visualization_and_clustering.pdf)
+- [doc/pdf/Task1.5_Model_building.pdf](doc/pdf/Task1.5_Model_building.pdf)
+- [doc/pdf/Task1.6_Model_Evaluation.pdf](doc/pdf/Task1.6_Model_Evaluation.pdf)
+
+## Deployment
+
+### Prerequisite
 Install Poetry
 
 - With pipx
@@ -23,7 +62,7 @@ Install dependencies with poetry
 poetry install
 ```
 
-## Run locally
+### Run locally
 
 Start flask server
 ```sh
@@ -36,7 +75,7 @@ Or view a fancy UI using streamlit
 poe streamlit-run
 ```
 
-## Run with docker
+### Run with docker
 
 ```sh
 poe docker-dev
@@ -48,7 +87,7 @@ Stop docker container with
 poe docker-stop
 ```
 
-## Run test
+### Run test
 
 __Note:__ Only test case is the test to check if the pickled input processor is working to ensure the deployment matches the environment in Colab's noteboook when building the models.
 
@@ -57,13 +96,13 @@ To run test:
 poe test
 ```
 
-## Format code with Ruff
+### Format code with Ruff
 
 ```sh
 poe ruff-fix
 ```
 
-## Deploy to AWS EC2
+### Deploy to AWS EC2
 
 Copy `aws-deploy/.env.example` to `aws-deploy/.env`
 
@@ -95,6 +134,8 @@ poe aws-start-ec2-instance
 
 After the instance is started, the script will print DNS address, use it to get a HTTP link to the app that you just deployed.
 __Note:__ Even with the link, you will need to wait and refresh a few times as the setup process can take a couple of minutes.
+
+![Deploy from shell](./doc/img/shell_deploy.png "shell deploy")
 
 To stop EC2 instance
 ```sh

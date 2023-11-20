@@ -5,6 +5,9 @@ description = "UoA Capstone Project 1 - Ad Recommender System"
 authors = ["Vu Truong <forbidden.gun@gmail.com>"]
 
 [tool.poe.tasks]
+# Export notebooks to pdf
+nbconvert.shell = "cd colab-notebooks && jupyter nbconvert --to webpdf *.ipynb && mv *.pdf ../doc/pdf/"
+
 # Development serve
 dev.shell = "flask run --debug"
 streamlit-run.shell = "streamlit run ad_rec_streamlit.py"
